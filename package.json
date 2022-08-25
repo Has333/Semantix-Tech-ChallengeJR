@@ -1,13 +1,12 @@
 {
   "name": "semantix-tech-challenge",
   "version": "1.0.0",
-  "main": "src/server.js",
   "type": "module",
   "author": "Has333 <williammds00@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon main",
-    "run": "node main"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "dependencies": {
     "axios": "^0.27.2",
