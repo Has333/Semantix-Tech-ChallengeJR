@@ -3,4 +3,4 @@ import { Router } from "express";
 
 export const routes = new Router();
 
-routes.get("/users", usersController.listUsers);
+routes.get("/users", usersController.listAll);
