@@ -1,11 +1,11 @@
-function transformUserToDataModel(user) {
+function transformUserToDataModel(user, addresses, contacts) {
     const userModel = {
         id: user.id,
         createdAt: user.createdAt,
         fullName: user.firstName + ' ' + user.lastName,
         email: user.email,
-        /*
-        addresses: userAddress.map((address) => ({
+        
+        addresses: addresses.map((address) => ({
           AddressId: address.id,
           address: address.street + ' ' + address.number,
           country: address.country,
@@ -14,16 +14,12 @@ function transformUserToDataModel(user) {
           zipcode: address.zipcode,
           })),
 
-        contacts: userContact.map((contact) => ({
+          contacts: contacts.map((contact) => ({
             contactId: contact.id,
             name: contact.name,
             phoneNumber: contact.phoneNumber,
             email: contact.email}))
-            */
-            
-            
       };
-
       return userModel
 }
 
