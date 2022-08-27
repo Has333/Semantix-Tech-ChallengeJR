@@ -1,27 +1,20 @@
 import { transformUserToDataModel } from "../data-transformation/mockapi-user.js";
+import mockapiUserService from "../services/mockapi-user.service.js";
 import { sleep } from "../helpers/Sleep.helper.js";
-import axios from "axios";
-import "dotenv/config.js";
-const apiURL = process.env.API_URL;
 
-class usersController {
+class UsersController {
   async listAll (req, res) {
     try {
       const page = req.query.page   || 1;
       const limit = req.query.limit || 10;
 
       const completeUsersModel = [];
-
-      const users = (await axios.get(`${apiURL}/users?page=${page}&limit=${limit}`)
-      .catch(err => res.status(404).json({message: err.message}))).data;
+      const users = await mockapiUserService.listAll(page, limit);
 
       for (let user of users) {
         await sleep(1000);
-        const addresses = (await axios.get(`${apiURL}/users/${user.id}/address`)
-        .catch(err => res.status(404).json({message: err.message}))).data;
-
-        const contacts =  (await axios.get(`${apiURL}/users/${user.id}/contacts`)
-        .catch(err => res.status(404).json({message: err.message}))).data;
+        const addresses = await mockapiUserService.userAddresses(user.id);
+        const contacts = await mockapiUserService.userContacts(user.id);
         
         completeUsersModel.push(transformUserToDataModel(user, addresses, contacts));
       }
@@ -33,4 +26,4 @@ class usersController {
   }
 }
 
-export default new usersController();
+export default new UsersController();

@@ -1,6 +1,6 @@
-import usersController from "./controllers/usersController.js";
+import UsersController from "./controllers/usersController.js";
 import { Router } from "express";
 
 export const routes = new Router();
 
-routes.get("/users", usersController.listAll);
+routes.get("/users", UsersController.listAll);
