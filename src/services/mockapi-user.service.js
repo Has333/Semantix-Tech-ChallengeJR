@@ -4,43 +4,33 @@ import "dotenv/config.js";
 const apiURL = process.env.API_URL;
 
 class MockapiUserService {
-    async listAll(page, limit) {
-     const usersData = await axios.get(`${apiURL}/users?page=${page}&limit=${limit}`)
-     const users = usersData.data;
+    async listUsers(page, limit) {
+     const { data: usersData } = await axios.get(`${apiURL}/users?page=${page}&limit=${limit}`);
 
-     return users
+     return usersData
     }
 
-    async userAddresses(id) {
-        const userAddresses = await axios.get(`${apiURL}/users/${id}/address`);
-        const addresses = userAddresses.data;
-        const unavailable = {
-            street: "Unavailable",
-            number: "Unavailable"
-        }
-         addresses.push(unavailable);
+    async listAddressesById(id) {
+        const { data: userAddresses }  = await axios.get(`${apiURL}/users/${id}/address`);
 
-        return addresses
+        return userAddresses
     }
     
 
-    async userContacts(id) {
-        const userContacts = await axios.get(`${apiURL}/users/${id}/contacts`);
-        const contacts = userContacts.data;
-
-        return contacts
+    async listContactsById(id) {
+        const { data: userContacts } = await axios.get(`${apiURL}/users/${id}/contacts`);
+    
+            return userContacts
     }
 
-    async usersAmount() {
-        const usersAmount = await axios.get(`${apiURL}/users?sortBy=id&order=desc`)
-         const users = usersAmount.data;
+    async listUsersAmount() {
+        const { data: [ usersAmount ] } = await axios.get(`${apiURL}/users?sortBy=id&order=desc`);
 
-        return users[0].id
+        return usersAmount.id
     }
 
     async listUserById(id) {
-        const userId = await axios.get(`${apiURL}/users/${id}`);
-        const user = userId.data;
+        const { data: user } = await axios.get(`${apiURL}/users/${id}`);
 
         return user
     }

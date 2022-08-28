@@ -9,12 +9,12 @@ class UsersController {
       const limit = req.query.limit || 10;
 
       const completeUsersModel = [];
-      const users = await mockapiUserService.listAll(page, limit);
+      const users = await mockapiUserService.listUsers(page, limit);
 
       for (let user of users) {
         await sleep(1000);
-        const addresses = await mockapiUserService.userAddresses(user.id);
-        const contacts = await mockapiUserService.userContacts(user.id);
+        const addresses = await mockapiUserService.listAddressesById(user.id);
+        const contacts = await mockapiUserService.listContactsById(user.id);
         
         completeUsersModel.push(transformUserToDataModel(user, addresses, contacts));
       }
