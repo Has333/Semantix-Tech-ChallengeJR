@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 3000;
 
 MongoDB.init();
 
+UpsertUsersToDatabase();
+
 App.listen(PORT, () => {
     console.log(
         `Server listening on port: ${PORT}`

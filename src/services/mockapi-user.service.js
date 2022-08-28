@@ -14,9 +14,15 @@ class MockapiUserService {
     async userAddresses(id) {
         const userAddresses = await axios.get(`${apiURL}/users/${id}/address`);
         const addresses = userAddresses.data;
+        const unavailable = {
+            street: "Unavailable",
+            number: "Unavailable"
+        }
+         addresses.push(unavailable);
 
         return addresses
     }
+    
 
     async userContacts(id) {
         const userContacts = await axios.get(`${apiURL}/users/${id}/contacts`);

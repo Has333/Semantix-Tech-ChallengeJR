@@ -1,12 +1,21 @@
-function transformUserToDBModel(user) {
+function transformUserToDBModel(user, addresses, contacts) {
+
     const userModel = {
       fullName: user.firstName + ' ' + user.lastName,
       email: user.email,
-      address: user.street,
-      addressNumber: user.number,
-      phoneNumber: user.phoneNumber
+
+      address: addresses[0].street,
+      addressNumber: addresses[0].number,
+      
+      phoneNumber: contacts[0].phoneNumber,
+      
       };
+     
       return userModel
 }
 
 export { transformUserToDBModel }
+
+
+
+
