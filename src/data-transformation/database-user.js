@@ -2,7 +2,7 @@ function transformUserToDBModel(user, addresses, contacts) {
    const [ address ] = addresses;
    const [ contact ] = contacts;    
 
-    const userModel = {
+    return {
       fullName: `${user.firstName} ${user.lastName}`,
       email: user.email,
 
@@ -12,8 +12,6 @@ function transformUserToDBModel(user, addresses, contacts) {
       phoneNumber: contact ? contact.phoneNumber : "Unavailable",
       
       };
-     
-      return userModel
 }
 
 export { transformUserToDBModel }

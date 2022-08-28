@@ -18,7 +18,7 @@ Otherwise, the request will run by default one page, with a limit of ten users.
 
 ## Automation
 
-The automation is turned on automatically as a cron job whenever the project starts, and it's set up to run on an hourly basis. It gets user data from the Mockapi API,
+The automation is turned on automatically as a cron job whenever the project starts, and it's set up to run every thirty minutes. It gets user data from the Mockapi API,
 formats it to a specific data model, and upserts said data to a MongoDB Atlas database that should be set up in the project by whoever is using it, with it's
 connection string as an environment variable in a .env file.
 

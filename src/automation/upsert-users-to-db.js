@@ -5,25 +5,26 @@ import User from "../models/User.js";
 
 class Automation {
     async run() {
-        let usersAmount = await mockapiUserService.listUsersAmount();
-        let currentUser = 1; 
+       let page = 1;
+       let limit = 10;
+       let hasUsers = true;
 
-        for (currentUser; currentUser < usersAmount; currentUser++) {
-            await sleep(3000);
-            const user = await mockapiUserService.listUserById(currentUser);
-            const addresses = await mockapiUserService.listAddressesById(user.id);
+       while(hasUsers) {
+        const users = await mockapiUserService.listUsers(page, limit);
+        for (let user of users) {
+            await sleep(1000);
+            const address = await mockapiUserService.listAddressesById(user.id);
             const contacts = await mockapiUserService.listContactsById(user.id);
+            const DBUserModel = transformUserToDBModel(user, address, contacts);
             
-            const DBUserModel = transformUserToDBModel(user, addresses, contacts);
-            console.log(DBUserModel);
-
             await User.findOneAndUpdate(DBUserModel, DBUserModel, {
                 new: true,
                 upsert: true
-            });
-            
-            
+            });  
         }
+        hasUsers = users.length === limit
+        page++
+       }
         return
     }
 }
