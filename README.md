@@ -25,7 +25,7 @@ connection string as an environment variable in a .env file.
 ## Setting up the project
 
 * Install all dependencies using the command `npm install` (or `yarn install` depending on your package manager).
-* Create an .env file on the root directory, with a port, a valid MongoDB Atlas connection string, and a Mockapi URL. (like on .env.example).
+* Create a .env file at the root directory, with a port, a valid MongoDB Atlas connection string, and a Mockapi URL. (like on .env.example).
 * Run the command `npm start`. You should be notified on your console of a successful connection to the server, database, and the automation, as soon as it starts. (the delay can be changed manually in `src/jobs/cron.js`). 
 * Afterwards, the project is all set up and ready to go.
 
